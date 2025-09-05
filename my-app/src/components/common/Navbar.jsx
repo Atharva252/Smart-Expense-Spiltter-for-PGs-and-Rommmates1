@@ -4,8 +4,7 @@ const Navbar = () => {
   return (
     <nav className="navbar bg-dark text-light px-6 py-4 flex justify-between items-center">
       {/* Logo Section */}
-      <div className="flex items-center space-x-3">
-        <div className="w-8 h-8 rounded-full bg-yellow-600"></div>
+      <div className="flex items-center">
         <span className="font-bold text-xl">SplitEasy</span>
       </div>
 
