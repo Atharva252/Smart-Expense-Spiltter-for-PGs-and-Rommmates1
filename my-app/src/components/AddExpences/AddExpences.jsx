@@ -6,163 +6,155 @@ export default function AddExpense() {
   const [amount, setAmount] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('Food');
   const [selectedPayer, setSelectedPayer] = useState('Select member');
-  const [selectedDate, setSelectedDate] = useState('Jun 2, 2025');
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const [splitMethod, setSplitMethod] = useState('Split equally');
 
   const categories = ['Food', 'Rent', 'Electricity', 'Internet', 'Transport', 'Entertainment'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-900 to-yellow-800 p-8">
+    <div className="min-h-screen w-full p-4" style={{background: '#1c1b1f'}}> {/* main bg */}
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-white mb-2">Add Expense</h1>
-            <p className="text-amber-100">Log a new shared cost to your group</p>
+            <h1 className="text-3xl font-bold mb-2" style={{color:'#eee'}}>Add Expense</h1>
+            <p style={{color:'#f0dfa3'}}>Log a new shared cost to your group</p>
           </div>
-          <button className="bg-amber-800 bg-opacity-50 text-amber-100 px-6 py-3 rounded-lg hover:bg-opacity-70 transition-all duration-200 border border-amber-600 border-opacity-30">
+          <button style={{background:'#2f2e33',color:'#f0dfa3',border:'1px solid #a9883f'}} className="px-6 py-3 rounded-lg hover:brightness-105 transition-all duration-200 font-semibold">
             View Expenses
           </button>
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {/* Left Side - Keep it fair */}
-          <div className="bg-amber-800 bg-opacity-20 backdrop-blur-sm rounded-2xl p-6 border border-amber-600 border-opacity-20">
+          <div style={{background:'#2f2e33',borderRadius:'15px',padding:'24px',border:'1.5px solid #a9883f'}}>
             <div className="flex items-center gap-2 mb-4">
-              <h2 className="text-xl font-semibold text-white">Keep it fair</h2>
-              <div className="bg-yellow-500 rounded-full p-1">
-                <Lightbulb className="w-4 h-4 text-amber-900" />
+              <h2 className="text-xl font-semibold" style={{color:'#eee'}}>Keep it fair</h2>
+              <div style={{background:'#f0dfa3'}} className="rounded-full p-1">
+                <Lightbulb className="w-4 h-4" style={{color:'#a9883f'}} />
               </div>
-              <span className="text-xs bg-yellow-600 text-white px-2 py-1 rounded">Tip</span>
+              <span className="text-xs px-2 py-1 rounded" style={{background:'#a9883f',color:'#f0dfa3'}}>Tip</span>
             </div>
-            <p className="text-amber-200 text-sm mb-6">Split costs transparently with your crew</p>
-            
-            {/* Receipt/Image Upload Area */}
-            <div className="bg-gradient-to-br from-yellow-500 to-amber-500 rounded-xl h-64 flex items-center justify-center mb-4 border border-yellow-400 border-opacity-30">
+            <p style={{color:'#f0dfa3'}} className="italic font-semibold text-center leading-relaxed py-4 rounded-lg bg-[#a9883f] bg-opacity-85 mb-6" >
+              Keep costs transparent with your crew
+            </p>
+            {/* Receipt/Image Upload Area (kept for structure, but styled neutral) */}
+            <div style={{background:'#232224', border:'1.5px solid #a9883f', color:'#f0dfa3'}} className="rounded-xl h-40 flex items-center justify-center mb-4">
               <div className="text-center">
-                <div className="w-16 h-16 bg-yellow-400 bg-opacity-80 rounded-xl mx-auto mb-3 flex items-center justify-center">
-                  <Plus className="w-8 h-8 text-amber-900" />
+                <div style={{background:'#a9883f',opacity:0.85}} className="w-16 h-16 rounded-xl mx-auto mb-3 flex items-center justify-center">
+                  <Plus className="w-8 h-8" style={{color:'#232224'}} />
                 </div>
-                <p className="text-amber-900 font-medium">Upload receipt or add image</p>
-                <p className="text-amber-800 text-sm mt-1">Drag & drop or click to browse</p>
+                <p className="font-medium" style={{ color:'#f0dfa3'}}>Upload receipt or add image</p>
+                <p className="text-sm mt-1" style={{color:'#eee'}}>Drag & drop or click to browse</p>
               </div>
             </div>
-
-            <p className="text-amber-300 text-sm">Pro-tip: Add the exact date so balances stay accurate.</p>
+            <p style={{color:'#f0dfa3'}} className="text-sm">Pro-tip: Add the exact date so balances stay accurate.</p>
           </div>
 
           {/* Right Side - Expense Details */}
-          <div className="bg-amber-800 bg-opacity-20 backdrop-blur-sm rounded-2xl p-6 border border-amber-600 border-opacity-20">
-            <h2 className="text-xl font-semibold text-white mb-6">Expense Details</h2>
-            
+          <div style={{background:'#232224',borderRadius:'15px',padding:'24px',border:'1.5px solid #a9883f'}}>
+            <h2 className="text-xl font-semibold mb-6" style={{color:'#eee'}}>Expense Details</h2>
             <div className="space-y-6">
               {/* Amount */}
               <div>
-                <label className="block text-amber-200 text-sm mb-2 font-medium">Amount</label>
+                <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Amount</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300" />
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
                   <input
                     type="text"
                     placeholder="Enter amount (e.g. 86.40)"
                     value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="w-full bg-amber-900 bg-opacity-40 text-white placeholder-amber-300 pl-10 pr-4 py-3 rounded-lg border border-amber-600 border-opacity-40 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-30 transition-all duration-200"
+                    onChange={e => setAmount(e.target.value)}
+                    style={{background:'#1b1a1e',color:'#eee',border:'none'}}
+                    className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 placeholder-[#f0dfa3]"
                   />
                 </div>
               </div>
-
               <div className="grid grid-cols-2 gap-4">
                 {/* Category */}
                 <div>
-                  <label className="block text-amber-200 text-sm mb-2 font-medium">Category</label>
+                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Category</label>
                   <div className="relative">
-                    <Utensils className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300" />
+                    <Utensils className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
                     <select
                       value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="w-full bg-amber-900 bg-opacity-40 text-white pl-10 pr-10 py-3 rounded-lg border border-amber-600 border-opacity-40 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-30 appearance-none transition-all duration-200"
+                      onChange={e => setSelectedCategory(e.target.value)}
+                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
+                      className="w-full pl-10 pr-10 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 appearance-none"
                     >
                       {categories.map(cat => (
-                        <option key={cat} value={cat} className="bg-amber-900 text-white">{cat}</option>
+                        <option key={cat} value={cat} style={{background:'#232224',color:'#eee'}}>{cat}</option>
                       ))}
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300 pointer-events-none" />
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
                   </div>
                 </div>
-
                 {/* Payer */}
                 <div>
-                  <label className="block text-amber-200 text-sm mb-2 font-medium">Payer</label>
+                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Payer</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300" />
-                    <select
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
+                    <input
+                      type="text"
+                      placeholder="Select member"
                       value={selectedPayer}
-                      onChange={(e) => setSelectedPayer(e.target.value)}
-                      className="w-full bg-amber-900 bg-opacity-40 text-white pl-10 pr-10 py-3 rounded-lg border border-amber-600 border-opacity-40 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-30 appearance-none transition-all duration-200"
-                    >
-                      <option className="bg-amber-900 text-white">Select member</option>
-                      <option className="bg-amber-900 text-white">John Doe</option>
-                      <option className="bg-amber-900 text-white">Jane Smith</option>
-                      <option className="bg-amber-900 text-white">Mike Johnson</option>
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300 pointer-events-none" />
+                      onChange={e => setSelectedPayer(e.target.value)}
+                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 placeholder-[#f0dfa3]"
+                    />
                   </div>
                 </div>
               </div>
-
               <div className="grid grid-cols-2 gap-4">
                 {/* Date */}
                 <div>
-                  <label className="block text-amber-200 text-sm mb-2 font-medium">Date</label>
+                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Date</label>
                   <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300" />
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
                     <input
-                      type="text"
+                      type="date"
                       value={selectedDate}
-                      onChange={(e) => setSelectedDate(e.target.value)}
-                      className="w-full bg-amber-900 bg-opacity-40 text-white pl-10 pr-10 py-3 rounded-lg border border-amber-600 border-opacity-40 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-30 transition-all duration-200"
+                      onChange={e => setSelectedDate(e.target.value)}
+                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
+                      className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50"
                     />
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300 pointer-events-none" />
                   </div>
                 </div>
-
                 {/* Split Method */}
                 <div>
-                  <label className="block text-amber-200 text-sm mb-2 font-medium">Split Method</label>
+                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Split Method</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
                     <select
                       value={splitMethod}
-                      onChange={(e) => setSplitMethod(e.target.value)}
-                      className="w-full bg-amber-900 bg-opacity-40 text-white pl-10 pr-10 py-3 rounded-lg border border-amber-600 border-opacity-40 focus:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-30 appearance-none transition-all duration-200"
+                      onChange={e => setSplitMethod(e.target.value)}
+                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
+                      className="w-full pl-10 pr-10 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 appearance-none"
                     >
-                      <option className="bg-amber-900 text-white">Split equally</option>
-                      <option className="bg-amber-900 text-white">Split by percentage</option>
-                      <option className="bg-amber-900 text-white">Split by amount</option>
-                      <option className="bg-amber-900 text-white">Split by shares</option>
+                      <option style={{background:'#232224',color:'#eee'}}>Split equally</option>
+                      <option style={{background:'#232224',color:'#eee'}}>Split by percentage</option>
+                      <option style={{background:'#232224',color:'#eee'}}>Split by amount</option>
+                      <option style={{background:'#232224',color:'#eee'}}>Split by shares</option>
                     </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-amber-300 pointer-events-none" />
+                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
                   </div>
                 </div>
               </div>
-
               {/* Action Buttons */}
               <div className="flex items-center justify-between pt-6">
-                <button className="flex items-center gap-2 text-amber-200 hover:text-white transition-colors duration-200 px-4 py-2 rounded-lg hover:bg-amber-800 hover:bg-opacity-30">
+                <button type="button" className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors duration-200" style={{background:'#444',color:'#eee',border:'none'}}>
                   <ArrowLeft className="w-5 h-5" />
                   Cancel
                 </button>
-                
-                <button className="bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 hover:to-amber-500 text-white px-8 py-3 rounded-lg font-medium flex items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                <button type="button" style={{background:'#cfa548',color:'#231f11',fontWeight:'bold',borderRadius:'12px',border:'none'}} className="px-8 py-3 flex items-center gap-2 font-semibold shadow hover:brightness-105 transition-all duration-200">
                   <Plus className="w-5 h-5" />
                   Add Expense
                 </button>
               </div>
-
-              {/* Categories */}
-              <div className="pt-4 border-t border-yellow-700 border-opacity-40">
-                <p className="text-yellow-300 text-sm">
-                  <span className="font-medium text-yellow-200">Categories:</span> Food, Rent, Electricity, Internet
+              {/* Categories note */}
+              <div className="pt-4 border-t" style={{borderColor:'#a9883f',borderOpacity:0.4}}>
+                <p className="text-sm" style={{color:'#f0dfa3'}}>
+                  <span className="font-medium" style={{color:'#a9883f'}}>Categories:</span> Food, Rent, Electricity, Internet, Transport, Entertainment
                 </p>
               </div>
             </div>
