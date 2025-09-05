@@ -1,184 +1,391 @@
-import Image from 'next/image';
+import Image from "next/image";
+import {
+  Tag,
+  LayoutDashboard,
+  PieChart,
+  Flashlight,
+  ShieldCheck,
+  Users,
+  ChevronRight,
+  Sparkles,
+} from "lucide-react";
 
 export default function Homesection() {
+  const colors = {
+    bg: "#0B0E11",
+    card: "#121417",
+    card2: "#161A1F",
+    border: "#2A2F36",
+    textMuted: "#A6ADBB",
+    chipBg: "#0E1115",
+    chipBorder: "#2E3440",
+    gold: "#F6C35E",
+    goldHover: "#F3B74A",
+  };
+
+  const chipItems = [
+    "Rent",
+    "Utilities",
+    "Gym",
+    "Groceries",
+    "Shared",
+    "Insurance",
+    "Cleaning",
+    "Supplies",
+    "House",
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-200 font-sans px-6 py-12 max-w-7xl mx-auto flex flex-col space-y-12">
-      
-      {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center gap-10">
-        {/* Left Content */}
+    <div
+      className="min-h-screen text-white font-sans px-6 py-14 md:py-16 mx-auto flex flex-col space-y-10 md:space-y-12"
+      style={{ backgroundColor: colors.bg, maxWidth: "1120px" }}
+    >
+      {/* HERO */}
+      <section className="flex flex-col md:flex-row items-start md:items-center gap-10">
+        {/* Left */}
         <div className="flex-1 max-w-xl space-y-6">
-          <span className="inline-block bg-gray-700 rounded-full px-3 py-1 text-xs font-semibold text-yellow-400">
-            Playful reasonable vibes, powerful expense breaking
+          <span
+            className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-medium shadow"
+            style={{
+              background: colors.chipBg,
+              border: `1px solid ${colors.border}`,
+              color: colors.gold,
+            }}
+          >
+            <span
+              className="h-1.5 w-1.5 rounded-full"
+              style={{ background: colors.gold }}
+            />
+            Premium, simple & good roommate experience
           </span>
-          <h1 className="text-4xl font-extrabold leading-tight">
+
+          <h1 className="leading-tight tracking-tight text-[38px] md:text-[46px] font-extrabold">
             Welcome home to stress-free splits
           </h1>
-          <p className="text-gray-400 text-lg">
-            A netshared home with colorful room patterns, a cozy illustration, and quick actions to jump into groups, add expenses, or settle up.
+
+          <p
+            className="text-lg"
+            style={{ color: colors.textMuted, maxWidth: 560 }}
+          >
+            A premium, easy-to-use split expense tool for PGs and roommates —
+            classic, modern, and friendly.
           </p>
-          <div className="flex space-x-4">
-            <button className="bg-yellow-500 px-6 py-2 rounded font-semibold text-black hover:bg-yellow-400 transition">
+
+          <div className="flex flex-wrap gap-3">
+            <button
+              className="px-5 md:px-6 py-2.5 rounded-xl font-semibold transition shadow"
+              style={{
+                background: colors.gold,
+                color: "#0B0E11",
+                boxShadow: "0 10px 28px rgba(246,195,94,0.35)",
+              }}
+            >
               Get Started Free
             </button>
-            <button className="border border-yellow-500 px-6 py-2 rounded text-yellow-400 hover:bg-yellow-600 transition">
-              See How It Works
+            <button
+              className="px-5 md:px-6 py-2.5 rounded-xl font-semibold transition flex items-center gap-2"
+              style={{
+                background: "transparent",
+                color: colors.gold,
+                border: `1px solid ${colors.gold}`,
+              }}
+            >
+              See How It Works <ChevronRight size={18} />
             </button>
           </div>
 
-          <div className="flex items-center space-x-2 mt-6">
+          {/* Avatars + CTA */}
+          <div className="flex items-center gap-2 pt-2">
             <img
               src="/avtar1.jpg"
-              alt="User avatar"
-              className="w-8 h-8 rounded-full border-2 border-gray-800"
+              alt="avatar"
+              className="w-8 h-8 rounded-full ring-2 ring-[#0B0E11]"
             />
             <img
               src="/avtar2.jpg"
-              alt="User avatar"
-              className="w-8 h-8 rounded-full border-2 border-gray-800"
+              alt="avatar"
+              className="w-8 h-8 rounded-full ring-2 ring-[#0B0E11] -ml-2"
             />
             <img
               src="/avtar3.jpg"
-              alt="User avatar"
-              className="w-8 h-8 rounded-full border-2 border-gray-800"
+              alt="avatar"
+              className="w-8 h-8 rounded-full ring-2 ring-[#0B0E11] -ml-2"
             />
-            <span className="text-sm text-gray-400 ml-3">
-              Trusted by sustainable households, road trips, and clubs. Join us!
+            <span
+              className="text-sm ml-2"
+              style={{ color: colors.textMuted }}
+            >
+              Trusted by roommates, friends, road trips, and clubs. Join us!
             </span>
-            <button className="ml-auto bg-yellow-500 text-black px-4 py-1 rounded hover:bg-yellow-400 transition whitespace-nowrap">
+            <button
+              className="ml-auto px-4 py-2 rounded-xl font-semibold transition shadow"
+              style={{
+                background: colors.gold,
+                color: "#0B0E11",
+                boxShadow: "0 10px 28px rgba(246,195,94,0.35)",
+                whiteSpace: "nowrap",
+              }}
+            >
               Create a Group
             </button>
           </div>
         </div>
 
         {/* Right Image */}
-        <div className="flex-1 max-w-full">
-          <Image
-            src="/homehero.jpg"
-            alt="Person working on a laptop in cozy living room"
-            width={600}
-            height={400}
-            priority
-            className="rounded-lg object-cover shadow-lg"
+        <div className="flex-1 w-full">
+          <div
+            className="rounded-2xl overflow-hidden"
+            style={{ border: `1px solid ${colors.border}` }}
+          >
+            <Image
+              src="/homehero.jpg"
+              alt="Relaxed at home"
+              width={640}
+              height={420}
+              priority
+              className="object-cover w-full h-auto"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ROW 2 */}
+      <section className="grid md:grid-cols-2 gap-6">
+        {/* Roommate Patterns */}
+        <div
+          className="rounded-2xl p-6"
+          style={{
+            background: colors.card,
+            border: `1px solid ${colors.border}`,
+          }}
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <Tag size={18} color={colors.gold} />
+            <h2 className="text-xl font-semibold">Roommate Patterns</h2>
+          </div>
+          <p className="mb-4" style={{ color: colors.textMuted }}>
+            Create categories and flows that fit shared living: rent, utilities,
+            groceries, cleaning, and more.
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {chipItems.map((c) => (
+              <span
+                key={c}
+                className="px-3 py-1 rounded-full text-sm"
+                style={{
+                  background: colors.chipBg,
+                  border: `1px solid ${colors.chipBorder}`,
+                  color: "#D6DBE6",
+                }}
+              >
+                {c}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Dashboard Preview */}
+        <div
+          className="rounded-2xl p-6 flex flex-col"
+          style={{
+            background: colors.card,
+            border: `1px solid ${colors.border}`,
+          }}
+        >
+          <div className="flex items-center gap-2 mb-3">
+            <LayoutDashboard size={18} color={colors.gold} />
+            <h2 className="text-xl font-semibold">Dashboard Preview</h2>
+          </div>
+          <p className="mb-4" style={{ color: colors.textMuted }}>
+            Track all categories and see who owes who.
+          </p>
+
+          <div
+            className="flex-1 rounded-xl mb-5"
+            style={{
+              background: colors.card2,
+              border: `1px dashed ${colors.border}`,
+              minHeight: 140,
+            }}
           />
-        </div>
-      </section>
 
-      {/* Roommate Patterns */}
-      <section className="bg-gray-800 rounded-lg p-6 flex flex-col">
-        <h2 className="text-xl font-semibold mb-4">Roommate Patterns</h2>
-        <p className="text-gray-400 mb-4 max-w-2xl">
-          Please categories and flows that fit shared living: rent, utilities, groceries, cleaning, and more.
-        </p>
-        <div className="flex flex-wrap gap-3">
-          {[
-            "Rent", "Monthly", "Utilities", "Gym", "Groceries", "Shared", 
-            "Insurance", "Gas", "Cleaning", "Supplies", "House"
-          ].map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 rounded-full bg-yellow-600 text-black text-sm font-semibold"
+          <div className="flex flex-wrap gap-3">
+            <button
+              className="px-5 py-2.5 rounded-xl font-semibold transition shadow"
+              style={{
+                background: colors.gold,
+                color: "#0B0E11",
+                boxShadow: "0 10px 28px rgba(246,195,94,0.35)",
+              }}
             >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* Dashboard Preview */}
-      <section className="bg-gray-800 rounded-lg p-6 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div>
-          <h2 className="text-xl font-semibold mb-3">Dashboard Preview</h2>
-          <p className="text-gray-400 max-w-lg">
-            Pie of categories and bar by roommates.
-          </p>
-        </div>
-        <div className="flex gap-3 flex-wrap">
-          <button className="bg-yellow-500 text-black px-5 py-2 rounded font-semibold hover:bg-yellow-400 transition">
-            Add Expense
-          </button>
-          <button className="border border-yellow-500 text-yellow-400 px-5 py-2 rounded hover:bg-yellow-600 transition">
-            View Groups
-          </button>
-          <button className="border border-yellow-500 text-yellow-400 px-5 py-2 rounded hover:bg-yellow-600 transition">
-            Settle Up
-          </button>
-        </div>
-      </section>
-
-      {/* Themes */}
-      <section className="flex flex-col md:flex-row gap-6">
-        <div className="bg-gray-800 rounded-lg p-6 flex-1 flex flex-col space-y-4">
-          <h3 className="text-lg font-semibold">Fresh PGs Theme</h3>
-          <p className="text-gray-400 mb-4">
-            Optimized for paying guests and shared housing; simple, accruing splits and easy move-ins.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {["Security deposit", "Monthly food plan", "Room service", "Laundry"].map((item) => (
-              <span
-                key={item}
-                className="px-3 py-1 rounded bg-yellow-600 text-black text-sm font-semibold"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-gray-800 rounded-lg p-6 flex-1 flex flex-col space-y-4">
-          <h3 className="text-lg font-semibold">Cozy Roommate Theme</h3>
-          <p className="text-gray-400 mb-4">
-            A playful palette with warm accents and soft panels that make the app feel like home.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            {["Bill overview", "Shared pantry", "Chores tracker", "Utilities split"].map((item) => (
-              <span
-                key={item}
-                className="px-3 py-1 rounded bg-yellow-600 text-black text-sm font-semibold"
-              >
-                {item}
-              </span>
-            ))}
+              Add Expense
+            </button>
+            <button
+              className="px-5 py-2.5 rounded-xl font-semibold transition"
+              style={{
+                background: "transparent",
+                color: colors.gold,
+                border: `1px solid ${colors.gold}`,
+              }}
+            >
+              View Groups
+            </button>
+            <button
+              className="px-5 py-2.5 rounded-xl font-semibold transition"
+              style={{
+                background: "transparent",
+                color: colors.gold,
+                border: `1px solid ${colors.gold}`,
+              }}
+            >
+              Settle Up
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="flex flex-col md:flex-row gap-6 mt-8">
+      {/* ROW 3: Themes */}
+      <section className="grid md:grid-cols-2 gap-6">
+        <div
+          className="rounded-2xl p-6"
+          style={{
+            background: colors.card,
+            border: `1px solid ${colors.border}`,
+          }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles size={18} color={colors.gold} />
+            <h3 className="font-semibold text-lg">Fresh PGs Theme</h3>
+          </div>
+          <p className="mb-4" style={{ color: colors.textMuted }}>
+            Optimized for paying guests and shared household: simple, recurring
+            splits and flexible move-ins.
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {["Security deposit", "Monthly food plan", "Room service", "Laundry"].map(
+              (t) => (
+                <span
+                  key={t}
+                  className="px-3 py-1 rounded-full text-sm"
+                  style={{
+                    background: colors.chipBg,
+                    border: `1px solid ${colors.chipBorder}`,
+                    color: "#D6DBE6",
+                  }}
+                >
+                  {t}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+
+        <div
+          className="rounded-2xl p-6"
+          style={{
+            background: colors.card,
+            border: `1px solid ${colors.border}`,
+          }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Users size={18} color={colors.gold} />
+            <h3 className="font-semibold text-lg">Cozy Roommate Theme</h3>
+          </div>
+          <p className="mb-4" style={{ color: colors.textMuted }}>
+            A playful palette with warm accents and soft panels that make the
+            app feel like home.
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {["Bill overview", "Shared pantry", "Chores tracker", "Utilities split"].map(
+              (t) => (
+                <span
+                  key={t}
+                  className="px-3 py-1 rounded-full text-sm"
+                  style={{
+                    background: colors.chipBg,
+                    border: `1px solid ${colors.chipBorder}`,
+                    color: "#D6DBE6",
+                  }}
+                >
+                  {t}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ROW 4: Feature trio */}
+      <section className="grid md:grid-cols-3 gap-6">
         {[
           {
             title: "Visual Dashboard",
-            desc: "See who owes whom, category pie, and member share at a glance."
+            desc:
+              "See who owes whom, category pie, and member bars at a glance.",
+            Icon: PieChart,
           },
           {
             title: "Quick Actions",
-            desc: "Add expense, view groups, or settle up in a tap."
+            desc: "Add expenses, view groups, or settle up in one click.",
+            Icon: Flashlight,
           },
           {
             title: "Private & Secure",
-            desc: "Safe by default with modern best practices."
-          }
-        ].map(({ title, desc }) => (
+            desc: "Built-in privacy with modern best practices.",
+            Icon: ShieldCheck,
+          },
+        ].map(({ title, desc, Icon }) => (
           <div
             key={title}
-            className="bg-gray-800 rounded-lg p-6 flex-1 text-center space-y-3"
+            className="rounded-2xl p-6"
+            style={{
+              background: colors.card,
+              border: `1px solid ${colors.border}`,
+            }}
           >
-            <h4 className="font-semibold text-lg">{title}</h4>
-            <p className="text-gray-400">{desc}</p>
+            <div className="flex items-center gap-2 mb-2">
+              <Icon size={18} color={colors.gold} />
+              <h4 className="font-semibold text-lg">{title}</h4>
+            </div>
+            <p style={{ color: colors.textMuted }}>{desc}</p>
           </div>
         ))}
       </section>
 
-      {/* Call to Action */}
-      <section className="bg-gray-800 rounded-lg p-6 flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-        <p className="max-w-lg text-gray-300 text-center md:text-left">
-          Move in to an easier split life. Create a roommate group or PG house and start tracking today.
+      {/* CTA */}
+      <section
+        className="rounded-2xl p-6 md:p-7 flex flex-col md:flex-row items-center justify-between gap-4"
+        style={{
+          background: colors.card,
+          border: `1px solid ${colors.border}`,
+        }}
+      >
+        <p
+          className="text-center md:text-left"
+          style={{ color: colors.textMuted, maxWidth: 720 }}
+        >
+          Move in to an easier split life. Create a roommate group or PG house
+          and start tracking today.
         </p>
-        <div className="flex gap-4">
-          <button className="bg-yellow-500 px-6 py-2 rounded text-black font-semibold hover:bg-yellow-400 transition">
+        <div className="flex gap-3">
+          <button
+            className="px-5 md:px-6 py-2.5 rounded-xl font-semibold transition shadow"
+            style={{
+              background: colors.gold,
+              color: "#0B0E11",
+              boxShadow: "0 10px 28px rgba(246,195,94,0.35)",
+            }}
+          >
             Sign Up Free
           </button>
-          <button className="border border-yellow-500 px-6 py-2 rounded text-yellow-400 hover:bg-yellow-600 transition">
+          <button
+            className="px-5 md:px-6 py-2.5 rounded-xl font-semibold transition"
+            style={{
+              background: "transparent",
+              color: colors.gold,
+              border: `1px solid ${colors.gold}`,
+            }}
+          >
             Try a Demo
           </button>
         </div>
