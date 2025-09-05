@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Home() {
+export default function Homesection() {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-200 font-sans px-6 py-12 max-w-7xl mx-auto flex flex-col space-y-12">
       
@@ -28,17 +28,17 @@ export default function Home() {
 
           <div className="flex items-center space-x-2 mt-6">
             <img
-              src="https://randomuser.me/api/portraits/thumb/men/32.jpg"
+              src="/avtar1.jpg"
               alt="User avatar"
               className="w-8 h-8 rounded-full border-2 border-gray-800"
             />
             <img
-              src="https://randomuser.me/api/portraits/thumb/women/44.jpg"
+              src="/avtar2.jpg"
               alt="User avatar"
               className="w-8 h-8 rounded-full border-2 border-gray-800"
             />
             <img
-              src="https://randomuser.me/api/portraits/thumb/men/54.jpg"
+              src="/avtar3.jpg"
               alt="User avatar"
               className="w-8 h-8 rounded-full border-2 border-gray-800"
             />
@@ -54,10 +54,11 @@ export default function Home() {
         {/* Right Image */}
         <div className="flex-1 max-w-full">
           <Image
-            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
+            src="/homehero.jpg"
             alt="Person working on a laptop in cozy living room"
             width={600}
             height={400}
+            priority
             className="rounded-lg object-cover shadow-lg"
           />
         </div>
@@ -72,7 +73,7 @@ export default function Home() {
         <div className="flex flex-wrap gap-3">
           {[
             "Rent", "Monthly", "Utilities", "Gym", "Groceries", "Shared", 
-            "Insurance", "Gas", "Cleaning", "Monthly", "Supplies", "House"
+            "Insurance", "Gas", "Cleaning", "Supplies", "House"
           ].map((tag) => (
             <span
               key={tag}
