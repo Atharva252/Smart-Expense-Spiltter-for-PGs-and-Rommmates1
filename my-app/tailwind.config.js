@@ -1,12 +1,12 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
+  content: [
+    "./src/app/**/*.{js,jsx,ts,tsx,mdx}",
+    "./src/components/**/*.{js,jsx,ts,tsx,mdx}",
+    "./src/pages/**/*.{js,jsx,ts,tsx,mdx}"
+  ],
   theme: {
-    extend: {
-      colors: {
-        darkbg: '#0D0D0D',
-        yellowcustom: '#B48711', // Change if you want exact shade as on image
-      },
-    },
+    extend: {}
   },
-  variants: {},
-  plugins: [],
+  plugins: []
 };
