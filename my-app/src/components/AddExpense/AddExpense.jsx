@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState } from 'react';
 import { ChevronDown, DollarSign, Calendar, User, Utensils, ArrowLeft, Lightbulb, Plus } from 'lucide-react';
 
