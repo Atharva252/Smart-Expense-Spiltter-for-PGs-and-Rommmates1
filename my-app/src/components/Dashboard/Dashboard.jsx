@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { Plus, Users, Settings, Copy, MoreHorizontal, User } from 'lucide-react';
 
