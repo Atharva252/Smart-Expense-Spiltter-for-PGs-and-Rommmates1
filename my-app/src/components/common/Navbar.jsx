@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
@@ -21,9 +22,11 @@ const Navbar = () => {
           </button>
         </li>
         <li>
-          <button className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition">
-            Groups
-          </button>
+          <Link href="/group">
+            <button className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition">
+              Groups
+            </button>
+          </Link>
         </li>
         <li>
           <button className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition">
