@@ -4,6 +4,7 @@ import Navbar from "@/components/common/Navbar";
 
 // import Homesection from "@/components/home/Homesection";
 import GlassDashboard from "@/components/GlassDashboard/GlassDashboard";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
    <>
      <Navbar />
      <AuthPage />
+     <Sidebar />
 
      {/* <Homesection /> */}
      <Footer />

@@ -1,166 +1,329 @@
-'use client';
-import { useState } from 'react';
-import { ChevronDown, DollarSign, Calendar, User, Utensils, ArrowLeft, Lightbulb, Plus } from 'lucide-react';
+"use client";
+
+import { useState } from "react";
+
+const categories = [
+  { label: "Food", icon: "🍽️" },
+  { label: "Rent", icon: "🏠" },
+  { label: "Electricity", icon: "💡" },
+  { label: "Internet", icon: "🌐" },
+];
+
+const members = ["Alice", "Bob", "Charlie", "David"];
+
+const splitMethods = [
+  { label: "Split equally", icon: "👥" },
+  { label: "Split by shares", icon: "📊" },
+  { label: "Split by amounts", icon: "💰" },
+];
 
 export default function AddExpense() {
-  const [amount, setAmount] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Food');
-  const [selectedPayer, setSelectedPayer] = useState('Select member');
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-  const [splitMethod, setSplitMethod] = useState('Split equally');
+  const [amount, setAmount] = useState("");
+  const [category, setCategory] = useState(categories[0].label);
+  const [payer, setPayer] = useState("");
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [splitMethod, setSplitMethod] = useState(splitMethods[0].label);
+  const [description, setDescription] = useState("");
 
-  const categories = ['Food', 'Rent', 'Electricity', 'Internet', 'Transport', 'Entertainment'];
+  const resetForm = () => {
+    setAmount("");
+    setCategory(categories[0].label);
+    setPayer("");
+    setDate(new Date().toISOString().slice(0, 10));
+    setSplitMethod(splitMethods[0].label);
+    setDescription("");
+  };
+
+  const handleAddExpense = (e) => {
+    e.preventDefault();
+    if (!amount || !payer) {
+      alert("Please enter the amount and select a payer.");
+      return;
+    }
+    const expenseData = {
+      amount: parseFloat(amount),
+      category,
+      payer,
+      date,
+      splitMethod,
+      description,
+    };
+    console.log("Expense Added:", expenseData);
+    alert("Expense added! Check console for details.");
+    resetForm();
+  };
 
   return (
-    <div className="min-h-screen w-full p-4" style={{background: '#1c1b1f'}}> {/* main bg */}
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold mb-2" style={{color:'#eee'}}>Add Expense</h1>
-            <p style={{color:'#f0dfa3'}}>Log a new shared cost to your group</p>
-          </div>
-          <button style={{background:'#2f2e33',color:'#f0dfa3',border:'1px solid #a9883f'}} className="px-6 py-3 rounded-lg hover:brightness-105 transition-all duration-200 font-semibold">
-            View Expenses
-          </button>
+    <div className="min-h-screen bg-gradient-to-br from-[#6e5944] via-[#201a15] to-[#0c0a07] text-gray-200 font-sans p-6 flex flex-col md:flex-row gap-6">
+      {/* Sidebar */}
+      <nav className="bg-[#3a2b13]/70 backdrop-blur rounded-xl w-full md:w-60 p-4 flex flex-col gap-4">
+        <div className="flex items-center gap-2 mb-6">
+          <div className="w-5 h-5 rounded-full bg-[#d6a544]" />
+          <h1 className="text-lg font-semibold">SplitEasy</h1>
+          <span className="bg-[#5d503b] text-xs py-[2px] px-2 rounded-full opacity-80">
+            Beta
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-          {/* Left Side - Keep it fair */}
-          <div style={{background:'#2f2e33',borderRadius:'15px',padding:'24px',border:'1.5px solid #a9883f'}}>
-            <div className="flex items-center gap-2 mb-4">
-              <h2 className="text-xl font-semibold" style={{color:'#eee'}}>Keep it fair</h2>
-              <div style={{background:'#f0dfa3'}} className="rounded-full p-1">
-                <Lightbulb className="w-4 h-4" style={{color:'#a9883f'}} />
-              </div>
-              <span className="text-xs px-2 py-1 rounded" style={{background:'#a9883f',color:'#f0dfa3'}}>Tip</span>
-            </div>
-            <p style={{color:'#f0dfa3'}} className="italic font-semibold text-center leading-relaxed py-4 rounded-lg bg-[#a9883f] bg-opacity-85 mb-6" >
-              Keep costs transparent with your crew
+        <button className="flex items-center gap-2 text-gray-300 bg-[#5d503b]/20 rounded-md px-3 py-2 text-left cursor-pointer shadow-inner" disabled>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeWidth={2} d="M3 10h4l3 9 4-18 3 9h4" />
+          </svg>
+          Dashboard
+        </button>
+
+        <button className="flex items-center gap-2 bg-[#d6a544] text-[#1a1205] font-semibold rounded-md px-3 py-2 cursor-default shadow-md" disabled>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          Add Expense
+        </button>
+
+        <button className="flex items-center gap-2 text-gray-400 hover:text-gray-200 rounded-md px-3 py-2 cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeWidth={2}
+              d="M17 20h5v-2a7 7 0 10-14 0v2h5zM12 12a3 3 0 100-6 3 3 0 000 6z"
+            />
+          </svg>
+          Groups
+        </button>
+
+        <button className="flex items-center gap-2 text-gray-400 hover:text-gray-200 rounded-md px-3 py-2 cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeWidth={2}
+              d="M11.25 4.098a1.5 1.5 0 012.5 0l.72 1.555a1.5 1.5 0 001.176.795l1.671.298a1.5 1.5 0 01.813 2.557l-1.25 1.25a1.5 1.5 0 000 2.121l1.25 1.25a1.5 1.5 0 01-.813 2.557l-1.672.298a1.5 1.5 0 00-1.176.796l-.72 1.554a1.5 1.5 0 01-2.5 0l-.72-1.555a1.5 1.5 0 00-1.176-.796l-1.671-.3a1.5 1.5 0 01-.813-2.557l1.25-1.25a1.5 1.5 0 000-2.121l-1.25-1.25a1.5 1.5 0 01.813-2.558l1.673-.297a1.5 1.5 0 001.176-.795l.72-1.555z"
+            />
+          </svg>
+          Settings
+        </button>
+      </nav>
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col md:flex-row gap-6">
+        {/* Left Box: Keep it fair */}
+        <section className="bg-[#312913]/90 backdrop-blur-md rounded-2xl p-6 flex flex-col max-w-lg flex-grow shadow-lg">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">Add Expense</h2>
+            <p className="text-sm text-gray-400">Log a new shared cost to your group</p>
+          </div>
+          <div className="bg-[#b9974a] rounded-xl flex-1 my-3"></div>
+          <div className="flex justify-between items-center mt-4">
+            <p className="text-xs text-gray-400 italic">
+              Pro-tip: Add the exact date so balances stay accurate.
             </p>
-            {/* Receipt/Image Upload Area (kept for structure, but styled neutral) */}
-            <div style={{background:'#232224', border:'1.5px solid #a9883f', color:'#f0dfa3'}} className="rounded-xl h-40 flex items-center justify-center mb-4">
-              <div className="text-center">
-                <div style={{background:'#a9883f',opacity:0.85}} className="w-16 h-16 rounded-xl mx-auto mb-3 flex items-center justify-center">
-                  <Plus className="w-8 h-8" style={{color:'#232224'}} />
-                </div>
-                <p className="font-medium" style={{ color:'#f0dfa3'}}>Upload receipt or add image</p>
-                <p className="text-sm mt-1" style={{color:'#eee'}}>Drag & drop or click to browse</p>
-              </div>
-            </div>
-            <p style={{color:'#f0dfa3'}} className="text-sm">Pro-tip: Add the exact date so balances stay accurate.</p>
+            <button
+              type="button"
+              className="flex items-center gap-1 rounded-full border border-gray-500 px-3 py-1 text-sm hover:bg-[#5d503b]/50 transition"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              Tip
+            </button>
           </div>
+        </section>
 
-          {/* Right Side - Expense Details */}
-          <div style={{background:'#232224',borderRadius:'15px',padding:'24px',border:'1.5px solid #a9883f'}}>
-            <h2 className="text-xl font-semibold mb-6" style={{color:'#eee'}}>Expense Details</h2>
-            <div className="space-y-6">
-              {/* Amount */}
-              <div>
-                <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Amount</label>
-                <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
-                  <input
-                    type="text"
-                    placeholder="Enter amount (e.g. 86.40)"
-                    value={amount}
-                    onChange={e => setAmount(e.target.value)}
-                    style={{background:'#1b1a1e',color:'#eee',border:'none'}}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 placeholder-[#f0dfa3]"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {/* Category */}
-                <div>
-                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Category</label>
-                  <div className="relative">
-                    <Utensils className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
-                    <select
-                      value={selectedCategory}
-                      onChange={e => setSelectedCategory(e.target.value)}
-                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
-                      className="w-full pl-10 pr-10 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 appearance-none"
-                    >
-                      {categories.map(cat => (
-                        <option key={cat} value={cat} style={{background:'#232224',color:'#eee'}}>{cat}</option>
-                      ))}
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
-                  </div>
-                </div>
-                {/* Payer */}
-                <div>
-                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Payer</label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
-                    <input
-                      type="text"
-                      placeholder="Select member"
-                      value={selectedPayer}
-                      onChange={e => setSelectedPayer(e.target.value)}
-                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
-                      className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 placeholder-[#f0dfa3]"
+        {/* Right Box: Expense Details Form */}
+        <section className="bg-[#312913]/90 backdrop-blur-md rounded-2xl p-6 w-full max-w-md shadow-lg flex flex-col gap-4">
+          <h3 className="font-semibold text-lg mb-2">Expense Details</h3>
+
+          <form onSubmit={handleAddExpense} className="flex flex-col gap-4">
+            {/* Amount */}
+            <label className="block">
+              <span className="text-sm font-medium mb-1 block">Amount</span>
+              <div className="relative text-gray-100">
+                <span className="absolute inset-y-0 left-3 flex items-center pointer-events-none text-yellow-400">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeWidth={2}
+                      d="M12 8c-3.866 0-7 1.79-7 4s3.134 4 7 4 7-1.79 7-4-3.134-4-7-4z"
                     />
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {/* Date */}
-                <div>
-                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Date</label>
-                  <div className="relative">
-                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
-                    <input
-                      type="date"
-                      value={selectedDate}
-                      onChange={e => setSelectedDate(e.target.value)}
-                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
-                      className="w-full pl-10 pr-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50"
+                    <path
+                      strokeWidth={2}
+                      d="M12 12v.01"
                     />
-                  </div>
-                </div>
-                {/* Split Method */}
-                <div>
-                  <label className="block text-sm mb-2 font-medium" style={{color:'#f0dfa3'}}>Split Method</label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
-                    <select
-                      value={splitMethod}
-                      onChange={e => setSplitMethod(e.target.value)}
-                      style={{background:'#1b1a1e',color:'#eee',border:'none'}}
-                      className="w-full pl-10 pr-10 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#a9883f]/50 appearance-none"
-                    >
-                      <option style={{background:'#232224',color:'#eee'}}>Split equally</option>
-                      <option style={{background:'#232224',color:'#eee'}}>Split by percentage</option>
-                      <option style={{background:'#232224',color:'#eee'}}>Split by amount</option>
-                      <option style={{background:'#232224',color:'#eee'}}>Split by shares</option>
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{color:'#a9883f'}} />
-                  </div>
-                </div>
+                  </svg>
+                </span>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  placeholder="Enter amount (e.g., 86.40)"
+                  className="w-full bg-[#121212] rounded-lg py-2 pl-10 pr-4 placeholder-gray-500 text-white focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  required
+                />
               </div>
-              {/* Action Buttons */}
-              <div className="flex items-center justify-between pt-6">
-                <button type="button" className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors duration-200" style={{background:'#444',color:'#eee',border:'none'}}>
-                  <ArrowLeft className="w-5 h-5" />
-                  Cancel
-                </button>
-                <button type="button" style={{background:'#cfa548',color:'#231f11',fontWeight:'bold',borderRadius:'12px',border:'none'}} className="px-8 py-3 flex items-center gap-2 font-semibold shadow hover:brightness-105 transition-all duration-200">
-                  <Plus className="w-5 h-5" />
-                  Add Expense
-                </button>
-              </div>
-              {/* Categories note */}
-              <div className="pt-4 border-t" style={{borderColor:'#a9883f',borderOpacity:0.4}}>
-                <p className="text-sm" style={{color:'#f0dfa3'}}>
-                  <span className="font-medium" style={{color:'#a9883f'}}>Categories:</span> Food, Rent, Electricity, Internet, Transport, Entertainment
-                </p>
-              </div>
+            </label>
+
+            {/* Category and Payer */}
+            <div className="flex gap-4">
+              <label className="w-1/2 block">
+                <span className="text-sm font-medium mb-1 block">Category</span>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  className="w-full bg-[#121212] text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                >
+                  {categories.map((cat) => (
+                    <option key={cat.label} value={cat.label}>
+                      {cat.icon} {cat.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
+              <label className="w-1/2 block">
+                <span className="text-sm font-medium mb-1 block">Payer</span>
+                <select
+                  value={payer}
+                  onChange={(e) => setPayer(e.target.value)}
+                  className="w-full bg-[#121212] text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  required
+                >
+                  <option value="" disabled>
+                    Select member
+                  </option>
+                  {members.map((member) => (
+                    <option key={member} value={member}>
+                      {member}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </div>
-          </div>
-        </div>
-      </div>
+
+            {/* Date and Split Method */}
+            <div className="flex gap-4">
+              <label className="w-1/2 block">
+                <span className="text-sm font-medium mb-1 block">Date</span>
+                <input
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className="w-full bg-[#121212] text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  required
+                />
+              </label>
+
+              <label className="w-1/2 block">
+                <span className="text-sm font-medium mb-1 block">Split Method</span>
+                <select
+                  value={splitMethod}
+                  onChange={(e) => setSplitMethod(e.target.value)}
+                  className="w-full bg-[#121212] text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                >
+                  {splitMethods.map((method) => (
+                    <option key={method.label} value={method.label}>
+                      {method.icon} {method.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-between items-center mt-4">
+              <button
+                type="button"
+                onClick={resetForm}
+                className="flex items-center gap-2 bg-[#312913]/50 hover:bg-[#312913]/70 rounded-full py-2 px-4 text-sm"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 rotate-180"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="#D6A544"
+                >
+                  <path strokeWidth={2} d="M10 19l-7-7 7-7" />
+                </svg>
+                Cancel
+              </button>
+
+              <button
+                type="submit"
+                className="bg-[#d6a544] hover:bg-[#c5a23e] rounded-full py-2 px-5 flex items-center gap-2 text-[#1a1205] font-semibold text-sm shadow-md"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="#1a1205"
+                >
+                  <path strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                Add Expense
+              </button>
+            </div>
+          </form>
+
+          <p className="mt-2 text-xs text-gray-400">
+            Categories: Food, Rent, Electricity, Internet
+          </p>
+        </section>
+      </main>
+
+      {/* View Expenses Button */}
+      <button className="absolute top-6 right-6 flex items-center gap-2 bg-[#5d503b]/70 backdrop-blur rounded-xl px-5 py-2 shadow-lg text-sm hover:bg-[#5d503b]/90 transition">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="#fff"
+        >
+          <path
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+        View Expenses
+      </button>
     </div>
   );
 }
