@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 "use client";
+=======
+>>>>>>> 67e44bd38d408b0cde88a028b1e6056c2de4e8d8
 
 import { useRouter } from "next/navigation";
 import React from "react";
