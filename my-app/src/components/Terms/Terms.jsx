@@ -1,5 +1,3 @@
-// app/terms/page.jsx (Next.js 13+ App Router)
-// If using pages router -> pages/terms.jsx
 
 import React from "react";
 
