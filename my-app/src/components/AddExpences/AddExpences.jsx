@@ -157,6 +157,11 @@ export default function AddExpense() {
               Pro-tip: Add the exact date so balances stay accurate.
             </p>
           </div>
+        </section>
+
+        {/* Right Box: Expense Details Form */}
+        <section className="bg-[#312913]/90 backdrop-blur-md rounded-2xl p-6 w-full max-w-md shadow-lg flex flex-col gap-4">
+          <h3 className="font-semibold text-lg mb-2">Expense Details</h3>
 
           {/* Right Side - Expense Details */}
           <div
