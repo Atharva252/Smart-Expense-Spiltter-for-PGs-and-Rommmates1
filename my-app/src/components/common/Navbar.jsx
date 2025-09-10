@@ -1,45 +1,85 @@
-import React from 'react';
-import Link from 'next/link';
+"use client";
+import React from "react";
+import Link from "next/link";
+import { useAuth } from "../../context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
+  const router = useRouter();
+
+  function handleAuth() {
+    router.push("/auth");
+  }
+
   return (
-    <nav className="navbar bg-dark text-light px-6 py-4 flex justify-between items-center">
-      {/* Logo Section */}
+    <nav className="bg-[#181818] text-white px-6 py-4 flex justify-between items-center">
+      {/* Logo */}
       <div className="flex items-center">
-        <span className="font-bold text-xl">SplitEasy</span>
+        <Link href="/" className="font-bold text-xl text-[#e2b656]">
+          SplitEasy
+        </Link>
       </div>
 
       {/* Navigation Links */}
       <ul className="hidden md:flex space-x-5 text-sm font-semibold">
         <li>
-          <button className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition">
-            Features
-          </button>
-        </li>
-        <li>
-          <button className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition">
-            Pricing
-          </button>
-        </li>
-        <li>
           <Link href="/group">
-            <button className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition">
+            <span className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition cursor-pointer">
               Groups
-            </button>
+            </span>
           </Link>
         </li>
         <li>
-          <button className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition">
-            Support
-          </button>
+          <Link href="/HowItWork">
+            <span className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition cursor-pointer">
+              How It Works
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/Terms">
+            <span className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition cursor-pointer">
+              Terms
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/PrivacyPolicy">
+            <span className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition cursor-pointer">
+              Privacy
+            </span>
+          </Link>
+        </li>
+        <li>
+          <Link href="/contacts">
+            <span className="bg-gray-700 px-4 py-1 rounded-full hover:bg-gray-600 transition cursor-pointer">
+              Contact
+            </span>
+          </Link>
         </li>
       </ul>
 
-      {/* Auth Buttons */}
+      {/* Auth/User Section */}
       <div className="hidden md:block">
-        <button className="px-4 py-1 rounded-full bg-yellow-600 hover:bg-yellow-700 font-semibold text-black transition">
-          Login / Sign-up
-        </button>
+        {user ? (
+          <div className="flex items-center gap-4">
+            <span className="text-[#e2b656] font-semibold">{user.name}</span>
+            <button
+              className="bg-[#232323] text-white px-4 py-2 rounded-lg"
+              onClick={logout}
+            >
+              Logout
+            </button>
+          </div>
+        ) : (
+          <button
+            className="px-4 py-1 rounded-full bg-yellow-600 hover:bg-yellow-700 font-semibold text-black transition"
+            onClick={handleAuth}
+          >
+            Login / Sign-up
+          </button>
+        )}
       </div>
 
       {/* Mobile menu icon */}
@@ -52,7 +92,7 @@ const Navbar = () => {
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path 
+            <path
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}

@@ -1,9 +1,18 @@
-// app/settings/page.jsx (Next.js 13+ App Router)
-// If using pages router, save as pages/settings.jsx
+"use client";
 
+import { useRouter } from "next/navigation";
+import { FaArrowLeft } from "react-icons/fa";
 import React from "react";
 
-export default function Setting() {
+export default function Settings() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Here you can also clear auth tokens/cookies if needed
+    alert("You have been logged out!");
+    router.push("/login");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#1a1a1a] to-[#2a1a0a] text-white p-8">
       <div className="max-w-5xl mx-auto">
@@ -96,7 +105,7 @@ export default function Setting() {
           </div>
         </div>
 
-        {/* Group Settings */}
+        {/* Group + Advanced Settings */}
         <div className="bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] p-6 rounded-2xl shadow-lg mb-8">
           <h2 className="text-lg font-bold mb-4">Group Settings</h2>
           <div className="space-y-4">
@@ -125,16 +134,85 @@ export default function Setting() {
               </button>
             </div>
           </div>
+
+          {/* Advanced Settings Preview */}
+          <h2 className="text-lg font-bold mt-8 mb-4">Advanced</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="flex items-center gap-2">
+              <button className="bg-[#232323] text-white px-4 py-2 rounded-full font-semibold flex items-center gap-2 border border-[#232323]">
+                &#10003; Enabled
+              </button>
+              <span className="text-gray-400 text-xs">Round splits to 0.01</span>
+            </div>
+            <input
+              type="text"
+              value="Default tip: 10%"
+              readOnly
+              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-white border border-[#232323]"
+            />
+            <input
+              type="text"
+              value="Service fee: 0%"
+              readOnly
+              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-white border border-[#232323]"
+            />
+            <input
+              type="text"
+              value="Default: Evenly"
+              readOnly
+              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-white border border-[#232323]"
+            />
+            <input
+              type="text"
+              value="Alternate: Shares"
+              readOnly
+              className="w-full bg-[#232323] rounded-lg px-4 py-3 text-white border border-[#232323]"
+            />
+          </div>
+
+          {/* Members */}
+          <h2 className="text-lg font-bold mt-8 mb-4">Members</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {[
+              { name: "Alex", role: "Admin", img: "https://randomuser.me/api/portraits/men/32.jpg" },
+              { name: "Jamie", role: "Member", img: "https://randomuser.me/api/portraits/men/33.jpg" },
+              { name: "Riley", role: "Member", img: "https://randomuser.me/api/portraits/men/34.jpg" },
+            ].map((member, idx) => (
+              <div key={idx} className="bg-[#232323] rounded-lg p-4 text-white flex flex-col items-start">
+                <div className="flex items-center gap-2 mb-2">
+                  <img src={member.img} alt={member.name} className="w-8 h-8 rounded-full" />
+                  <span>{member.name}</span>
+                </div>
+                <span className="text-gray-400 text-xs">Role: {member.role}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom Save Button */}
-        <div className="flex justify-end">
-          <button className="bg-yellow-600 hover:bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg shadow-md transition">
-            Save Changes
+        {/* Bottom Buttons */}
+        <div className="flex justify-between items-center">
+          <button
+            onClick={() => router.back()}
+            className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2 transition"
+          >
+            <FaArrowLeft /> Back
           </button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => router.push("/dashboard")}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold transition"
+            >
+              Save Changes
+            </button>
+            <button
+              onClick={handleLogout}
+              className="bg-red-600 hover:bg-red-500 text-white px-6 py-3 rounded-lg font-semibold transition"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-// Note: This is a simplified placeholder. Replace with actual logic and data as needed.

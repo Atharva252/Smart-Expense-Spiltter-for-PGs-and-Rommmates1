@@ -1,16 +1,18 @@
-// app/terms/page.jsx (Next.js 13+ App Router)
-// If using pages router -> pages/terms.jsx
+"use client";
 
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Terms() {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#1a1a1a] to-[#2a1a0a] text-white p-8">
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">Terms of Service</h1>
-          <span className="text-gray-400 text-sm">Updated Jan 2025</span>
+         
         </div>
 
         {/* Terms List */}
@@ -65,14 +67,23 @@ export default function Terms() {
         {/* Action Buttons */}
         <div className="flex justify-between items-center">
           <div className="flex gap-3">
-            <button className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">
+            <button
+              onClick={() => router.back()}
+              className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm"
+            >
               Close
             </button>
-            <button className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">
+            <button
+              onClick={() => alert("Downloading Terms PDF...")}
+              className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm"
+            >
               Download PDF
             </button>
           </div>
-          <button className="bg-yellow-600 hover:bg-yellow-500 text-black font-semibold px-5 py-2 rounded-lg shadow-md transition">
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="bg-yellow-600 hover:bg-yellow-500 text-black font-semibold px-5 py-2 rounded-lg shadow-md transition"
+          >
             I Agree
           </button>
         </div>
@@ -85,4 +96,3 @@ export default function Terms() {
     </div>
   );
 }
-// Note: This is a simplified placeholder. Replace with actual logic and data as needed.

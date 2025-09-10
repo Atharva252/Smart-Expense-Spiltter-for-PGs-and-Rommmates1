@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FaEnvelope, FaPhone, FaClock, FaQuestionCircle, FaPaperPlane } from "react-icons/fa";
 
 export default function Contact() {
@@ -57,53 +58,31 @@ export default function Contact() {
           </div>
           <form className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Your name"
-                className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]"
-              />
-              <input
-                type="email"
-                placeholder="Email address"
-                className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]"
-              />
+              <input type="text" placeholder="Your name" className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]" />
+              <input type="email" placeholder="Email address" className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Topic (Billing, Bug, Feedback)"
-                className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]"
-              />
-              <input
-                type="text"
-                placeholder="Group name (optional)"
-                className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]"
-              />
+              <input type="text" placeholder="Topic (Billing, Bug, Feedback)" className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]" />
+              <input type="text" placeholder="Group name (optional)" className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#e2b656]" />
             </div>
-            <textarea
-              rows={4}
-              placeholder="Write your message..."
-              className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 w-full focus:outline-none focus:ring-2 focus:ring-[#e2b656]"
-            />
+            <textarea rows={4} placeholder="Write your message..." className="bg-[#232323] border border-[#444] rounded-lg px-4 py-3 text-white placeholder-gray-400 w-full focus:outline-none focus:ring-2 focus:ring-[#e2b656]" />
+            
             <div className="flex items-center gap-2">
               <input type="checkbox" id="copy" className="accent-[#e2b656]" />
               <label htmlFor="copy" className="text-gray-300 text-sm">Send me a copy via email</label>
             </div>
+
+            {/* Buttons */}
             <div className="flex gap-4 mt-4">
-              <button
-                type="submit"
-                className="flex items-center gap-2 bg-[#e2b656] hover:bg-[#f5d77c] text-black font-semibold rounded-lg px-6 py-3 shadow transition"
-              >
+              <button type="submit" className="flex items-center gap-2 bg-[#e2b656] hover:bg-[#f5d77c] text-black font-semibold rounded-lg px-6 py-3 shadow transition">
                 <FaPaperPlane />
                 Send Message
               </button>
-              <button
-                type="button"
-                className="flex items-center gap-2 bg-[#e2b656] hover:bg-[#f5d77c] text-black font-semibold rounded-lg px-6 py-3 shadow transition"
-              >
+
+              <Link href="/help" className="flex items-center gap-2 bg-[#e2b656] hover:bg-[#f5d77c] text-black font-semibold rounded-lg px-6 py-3 shadow transition">
                 <FaQuestionCircle />
                 View Help Center
-              </button>
+              </Link>
             </div>
           </form>
         </section>

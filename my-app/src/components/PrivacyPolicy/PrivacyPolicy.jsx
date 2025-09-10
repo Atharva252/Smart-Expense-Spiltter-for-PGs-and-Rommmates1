@@ -1,9 +1,11 @@
-// app/privacy/page.jsx (Next.js 13+ App Router)
-// If using pages router -> pages/privacy.jsx
+"use client";
 
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function PrivacyPolicy() {
+  const router = useRouter();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-[#1a1a1a] to-[#2a1a0a] text-white p-8">
       <div className="max-w-3xl mx-auto">
@@ -11,15 +13,9 @@ export default function PrivacyPolicy() {
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold">Privacy Policy</h1>
           <div className="flex gap-2">
-            <span className="text-gray-400 text-sm bg-gray-800 px-3 py-1 rounded-lg">
-              Updated Jan 2025
-            </span>
-            <span className="text-gray-400 text-sm bg-gray-800 px-3 py-1 rounded-lg">
-              GDPR
-            </span>
-            <span className="text-gray-400 text-sm bg-gray-800 px-3 py-1 rounded-lg">
-              CCPA
-            </span>
+          
+          
+            
           </div>
         </div>
 
@@ -75,14 +71,23 @@ export default function PrivacyPolicy() {
         {/* Action Buttons */}
         <div className="flex justify-between items-center">
           <div className="flex gap-3">
-            <button className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">
+            <button
+              onClick={() => router.back()}
+              className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm"
+            >
               Close
             </button>
-            <button className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">
+            <button
+              onClick={() => alert("Downloading PDF...")}
+              className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm"
+            >
               Download PDF
             </button>
           </div>
-          <button className="bg-yellow-600 hover:bg-yellow-500 text-black font-semibold px-5 py-2 rounded-lg shadow-md transition">
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="bg-yellow-600 hover:bg-yellow-500 text-black font-semibold px-5 py-2 rounded-lg shadow-md transition"
+          >
             I Acknowledge
           </button>
         </div>

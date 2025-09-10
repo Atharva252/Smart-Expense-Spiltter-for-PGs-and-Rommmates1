@@ -1,10 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { FaUserPlus, FaCog, FaArrowLeft } from "react-icons/fa";
 
 export default function CreateGroup() {
   return (
-    <div className="min-h-screen bg-black p-8 font-sans">
+    <div className="min-h-screen bg-black p-8 font-sans ml-[15vw]"> 
+      {/* Added left margin so content isn't hidden behind Sidebar */}
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
@@ -14,12 +16,20 @@ export default function CreateGroup() {
             <span className="bg-[#232323] text-gray-300 px-3 py-1 rounded-full text-xs">1–2 min</span>
           </div>
         </div>
+
         {/* Tabs */}
         <div className="flex gap-2 mb-4">
-          <button className="bg-[#232323] text-white px-4 py-1 rounded-full">Intro</button>
-          <button className="bg-[#232323] text-white px-4 py-1 rounded-full">How It Works</button>
-          <button className="bg-[#e2b656] text-black font-semibold px-4 py-1 rounded-full shadow">Next Steps</button>
+          <Link href="/intro" className="bg-[#232323] text-white px-4 py-1 rounded-full">
+            Intro
+          </Link>
+          <Link href="/how-it-works" className="bg-[#232323] text-white px-4 py-1 rounded-full">
+            How It Works
+          </Link>
+          <button className="bg-[#e2b656] text-black font-semibold px-4 py-1 rounded-full shadow">
+            Next Steps
+          </button>
         </div>
+
         {/* Card */}
         <div className="bg-[#181818] rounded-2xl shadow-lg p-6 mb-4 border border-[#232323]">
           {/* Group Name */}
@@ -32,6 +42,7 @@ export default function CreateGroup() {
               className="w-full bg-[#232323] rounded-lg px-4 py-3 text-white border border-[#232323] focus:outline-none"
             />
           </div>
+
           {/* Currency & Split */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -53,6 +64,7 @@ export default function CreateGroup() {
               />
             </div>
           </div>
+
           {/* Members */}
           <div className="mb-2">
             <label className="block text-gray-300 text-sm mb-1">Members</label>
@@ -66,7 +78,10 @@ export default function CreateGroup() {
                 Sam
               </div>
             </div>
-            <button className="flex items-center gap-2 text-gray-300 px-2 py-1">
+            <button
+              className="flex items-center gap-2 text-gray-300 px-2 py-1"
+              onClick={() => alert("Add member modal will open")}
+            >
               <FaUserPlus className="text-lg" />
               Add member
             </button>
@@ -74,7 +89,9 @@ export default function CreateGroup() {
               You can invite friends by name or email. Members can add expenses right away.
             </div>
           </div>
+
           <hr className="my-4 border-[#232323]" />
+
           {/* Quick rules */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -96,30 +113,32 @@ export default function CreateGroup() {
               />
             </div>
           </div>
+
           {/* Footer summary */}
           <div className="flex items-center justify-between bg-[#232323] rounded-lg px-4 py-3 mt-2">
             <span className="text-gray-300 text-sm">
               2 members • Default split: Evenly • Currency: USD
             </span>
-            <button className="flex items-center gap-2 text-gray-300">
+            <Link href="/groups/settings" className="flex items-center gap-2 text-gray-300">
               <FaCog />
               More settings
-            </button>
+            </Link>
           </div>
         </div>
+
         {/* Footer Buttons */}
         <div className="flex items-center justify-between mt-6">
-          <button className="bg-[#232323] text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2">
+          <Link href="/groups" className="bg-[#232323] text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2">
             <FaArrowLeft />
             Back
-          </button>
+          </Link>
           <div className="flex gap-2">
-            <button className="bg-[#232323] text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2">
+            <Link href="/add-expense" className="bg-[#232323] text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2">
               Add first expense
-            </button>
-            <button className="bg-[#e2b656] text-black px-6 py-2 rounded-lg font-semibold shadow">
+            </Link>
+            <Link href="/groups/overview" className="bg-[#e2b656] text-black px-6 py-2 rounded-lg font-semibold shadow">
               Create Group
-            </button>
+            </Link>
           </div>
         </div>
       </div>

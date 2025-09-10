@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { FaUtensils, FaHome, FaBolt, FaWifi } from "react-icons/fa";
 
 const members = [
@@ -13,7 +12,7 @@ const members = [
 const expenses = [
   {
     id: 1,
-    icon: <FaUtensils className="text-[#e2b656]" />,
+    icon: <FaUtensils className="text-black" />,
     title: "Dinner at Warung",
     date: "Jun 1, 2025",
     note: "Split equally",
@@ -22,7 +21,7 @@ const expenses = [
   },
   {
     id: 2,
-    icon: <FaHome className="text-[#e2b656]" />,
+    icon: <FaHome className="text-black" />,
     title: "Villa Rent",
     date: "Jun 1, 2025",
     note: "Monthly",
@@ -31,35 +30,26 @@ const expenses = [
   },
   {
     id: 3,
-    icon: <FaBolt className="text-[#e2b656]" />,
+    icon: <FaBolt className="text-black" />,
     title: "Electricity Bill",
     date: "May 30, 2025",
     note: "Utilities",
     paidBy: "Mia",
     amount: 74.2,
   },
-  // {
-  //   id: 4,
-  //   icon: <FaWifi className="text-[#e2b656]" />,
-  //   title: "Internet",
-  //   date: "May 28, 2025",
-  //   note: "Subscription",
-  //   paidBy: "Noah",
-  //   amount: 45,
-  // },
+  // Example extra:
+  // { id: 4, icon: <FaWifi className="text-black" />, title: "Internet", date: "May 28, 2025", note: "Subscription", paidBy: "Noah", amount: 45 },
 ];
 
 export default function Group() {
-  const router = useRouter();
   const totalSpent = expenses.reduce((sum, e) => sum + e.amount, 0);
   const youOwe = 132.8;
 
-  // Button style for gold effect
   const goldBtn =
     "bg-[#e2b656] hover:bg-[#f5d77c] text-black font-semibold rounded-lg px-5 py-2 shadow transition";
 
   return (
-    <main className="min-h-screen bg-gradient-to-tr from-black via-[#232323] to-[#e2b656] p-8 font-sans">
+    <main className="min-h-screen bg-gradient-to-tr from-black via-[#232323] to-[#e2b656] p-8 font-sans ml-[15vw]">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -72,13 +62,10 @@ export default function Group() {
             </p>
           </div>
           <div className="flex gap-4">
-            <button
-              className={goldBtn}
-              onClick={() => router.push("/AddExpences")}
-            >
+            <Link href="/add-expense" className={goldBtn}>
               + Add Expense
-            </button>
-            <button className={goldBtn + " flex items-center gap-1"}>
+            </Link>
+            <Link href="/groups/invite" className={goldBtn + " flex items-center gap-1"}>
               <svg
                 className="w-5 h-5"
                 fill="none"
@@ -90,7 +77,7 @@ export default function Group() {
                 <path d="M2 12l7-7m0 0l7 7m-7-7v18" />
               </svg>
               Invite
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -123,25 +110,30 @@ export default function Group() {
         <div className="flex flex-wrap gap-8">
           {/* Expenses */}
           <section className="flex-1 bg-[#232323] bg-opacity-80 rounded-2xl p-6 max-w-3xl min-w-[320px] shadow-lg">
-            <h2 className="font-semibold text-lg mb-4 text-white">Shared Expenses</h2>
+            <h2 className="font-semibold text-lg mb-4 text-white">
+              Shared Expenses
+            </h2>
+
+            {/* Filters */}
             <div className="flex gap-3 mb-6">
-              <button className="bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm hover:bg-[#353535] transition shadow border border-[#444]">
+              <button className="bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm shadow border border-[#444]">
                 All
               </button>
-              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm hover:bg-[#353535] transition shadow border border-[#444]">
+              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm shadow border border-[#444]">
                 <FaUtensils /> Food
               </button>
-              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm hover:bg-[#353535] transition shadow border border-[#444]">
+              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm shadow border border-[#444]">
                 <FaHome /> Rent
               </button>
-              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm hover:bg-[#353535] transition shadow border border-[#444]">
+              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm shadow border border-[#444]">
                 <FaBolt /> Electricity
               </button>
-              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm hover:bg-[#353535] transition shadow border border-[#444]">
+              <button className="flex items-center gap-1 bg-[#232323] text-[#e2b656] rounded-md px-3 py-1 text-sm shadow border border-[#444]">
                 <FaWifi /> Internet
               </button>
             </div>
 
+            {/* Expense list */}
             <ul className="space-y-4">
               {expenses.map((exp) => (
                 <li
@@ -149,7 +141,7 @@ export default function Group() {
                   className="flex items-center justify-between bg-[#232323] bg-opacity-80 rounded-xl p-4 shadow"
                 >
                   <div className="flex items-center gap-4">
-                    <div className="bg-[#e2b656] px-3 py-2 rounded-full text-lg text-black shadow">
+                    <div className="bg-[#e2b656] p-2 rounded-full shadow">
                       {exp.icon}
                     </div>
                     <div>
@@ -163,7 +155,9 @@ export default function Group() {
                     <span className="bg-[#232323] text-[#e2b656] rounded-xl px-3 py-1 text-xs font-semibold shadow border border-[#444]">
                       Paid by {exp.paidBy}
                     </span>
-                    <span className="font-semibold text-white">${exp.amount.toFixed(2)}</span>
+                    <span className="font-semibold text-white">
+                      ${exp.amount.toFixed(2)}
+                    </span>
                   </div>
                 </li>
               ))}
@@ -172,28 +166,34 @@ export default function Group() {
 
           {/* Balance */}
           <section className="w-96 bg-[#232323] bg-opacity-80 rounded-2xl p-6 flex flex-col justify-between shadow-lg">
-            <h2 className="font-semibold text-lg mb-6 text-white">Balance Summary</h2>
+            <h2 className="font-semibold text-lg mb-6 text-white">
+              Balance Summary
+            </h2>
             <div className="flex gap-4 mb-6">
               <div className="bg-[#232323] p-4 rounded-xl flex-1 shadow border border-[#444]">
                 <p className="text-gray-400 text-sm">Total Spent</p>
-                <p className="font-semibold text-xl text-[#e2b656]">${totalSpent.toFixed(2)}</p>
+                <p className="font-semibold text-xl text-[#e2b656]">
+                  ${totalSpent.toFixed(2)}
+                </p>
               </div>
               <div className="bg-[#232323] p-4 rounded-xl flex-1 shadow border border-[#444]">
                 <p className="text-gray-400 text-sm">You Owe</p>
-                <p className="font-semibold text-xl text-[#e2b656]">${youOwe.toFixed(2)}</p>
+                <p className="font-semibold text-xl text-[#e2b656]">
+                  ${youOwe.toFixed(2)}
+                </p>
               </div>
             </div>
             <div>
               <p className="font-semibold mb-4 text-white">Quick Actions</p>
-              <button className="flex items-center gap-2 bg-[#232323] text-[#e2b656] rounded-lg px-4 py-2 hover:bg-[#353535] transition shadow border border-[#444]">
-                View All
-              </button>
-              <button
-                className={`mt-4 w-full ${goldBtn}`}
-                onClick={() => router.push("/AddExpences")}
+              <Link
+                href="/settlement"
+                className="flex items-center justify-center gap-2 bg-[#232323] text-[#e2b656] rounded-lg px-4 py-2 hover:bg-[#353535] transition shadow border border-[#444]"
               >
+                View All
+              </Link>
+              <Link href="/add-expense" className={`mt-4 w-full block text-center ${goldBtn}`}>
                 + Add Expense
-              </button>
+              </Link>
             </div>
           </section>
         </div>

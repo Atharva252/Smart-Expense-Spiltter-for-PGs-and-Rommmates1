@@ -1,15 +1,14 @@
 import "./globals.css";
-
-export const metadata = {
-  title: "Smart Expense Splitter",
-  description: "Split expenses easily with roommates and PG mates",
-};
+import { AuthProvider } from "../context/AuthContext";
+import LayoutContent from "./LayoutContent";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {children}
+        <AuthProvider>
+          <LayoutContent>{children}</LayoutContent>
+        </AuthProvider>
       </body>
     </html>
   );
