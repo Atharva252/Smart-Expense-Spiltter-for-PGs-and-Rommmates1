@@ -48,18 +48,12 @@ export default function AddExpense() {
   };
 
   return (
-    <div
-      className="min-h-screen w-full p-4"
-      style={{ background: "#1c1b1f" }}
-    >
+    <div className="min-h-screen w-full p-4" style={{ background: "#1c1b1f" }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1
-              className="text-3xl font-bold mb-2"
-              style={{ color: "#eee" }}
-            >
+            <h1 className="text-3xl font-bold mb-2" style={{ color: "#eee" }}>
               Add Expense
             </h1>
             <p style={{ color: "#f0dfa3" }}>
@@ -67,7 +61,7 @@ export default function AddExpense() {
             </p>
           </div>
 
-          {/* ✅ View Expenses → linked with sidebar (/dashboard or /groups) */}
+          {/* ✅ View Expenses → linked with sidebar (/dashboard) */}
           <Link
             href="/dashboard"
             style={{
@@ -92,20 +86,14 @@ export default function AddExpense() {
             }}
           >
             <div className="flex items-center gap-2 mb-4">
-              <h2
-                className="text-xl font-semibold"
-                style={{ color: "#eee" }}
-              >
+              <h2 className="text-xl font-semibold" style={{ color: "#eee" }}>
                 Keep it fair
               </h2>
               <div
                 style={{ background: "#f0dfa3" }}
                 className="rounded-full p-1"
               >
-                <Lightbulb
-                  className="w-4 h-4"
-                  style={{ color: "#a9883f" }}
-                />
+                <Lightbulb className="w-4 h-4" style={{ color: "#a9883f" }} />
               </div>
               <span
                 className="text-xs px-2 py-1 rounded"
@@ -134,36 +122,22 @@ export default function AddExpense() {
                   style={{ background: "#a9883f", opacity: 0.85 }}
                   className="w-16 h-16 rounded-xl mx-auto mb-3 flex items-center justify-center"
                 >
-                  <Plus
-                    className="w-8 h-8"
-                    style={{ color: "#232224" }}
-                  />
+                  <Plus className="w-8 h-8" style={{ color: "#232224" }} />
                 </div>
                 <p className="font-medium" style={{ color: "#f0dfa3" }}>
                   Upload receipt or add image
                 </p>
-                <p
-                  className="text-sm mt-1"
-                  style={{ color: "#eee" }}
-                >
+                <p className="text-sm mt-1" style={{ color: "#eee" }}>
                   Drag & drop or click to browse
                 </p>
               </div>
             </div>
-            <p
-              style={{ color: "#f0dfa3" }}
-              className="text-sm"
-            >
+            <p style={{ color: "#f0dfa3" }} className="text-sm">
               Pro-tip: Add the exact date so balances stay accurate.
             </p>
           </div>
-        </section>
 
-        {/* Right Box: Expense Details Form */}
-        <section className="bg-[#312913]/90 backdrop-blur-md rounded-2xl p-6 w-full max-w-md shadow-lg flex flex-col gap-4">
-          <h3 className="font-semibold text-lg mb-2">Expense Details</h3>
-
-          {/* Right Side - Expense Details */}
+          {/* Right Box: Expense Details Form */}
           <div
             style={{
               background: "#232224",
@@ -351,7 +325,6 @@ export default function AddExpense() {
 
               {/* ✅ Action Buttons */}
               <div className="flex items-center justify-between pt-6">
-                {/* Cancel → goes back to dashboard */}
                 <Link
                   href="/dashboard"
                   className="flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-colors duration-200"
@@ -361,7 +334,6 @@ export default function AddExpense() {
                   Cancel
                 </Link>
 
-                {/* Add Expense → saves then routes to dashboard */}
                 <button
                   type="button"
                   onClick={handleAddExpense}
